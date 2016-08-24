@@ -602,6 +602,14 @@ impl BluetoothGATTService {
         }
     }
 
+    #[cfg(feature = "bluetooth-test")]
+    pub fn new_mock(device: BluetoothDevice, service_id: String) -> BluetoothGATTService {
+        BluetoothGATTService{
+            device: RefCell::new(device.clone()),
+            gatt_service: FakeBluetoothGATTService::new_empty(device.get_device(), service_id),
+        }
+    }
+
     #[cfg(all(target_os = "linux", feature = "bluetooth"))]
     fn get_gatt_service(&self) -> Arc<BluetoothGATTServiceBluez> {
         self.gatt_service.clone()
