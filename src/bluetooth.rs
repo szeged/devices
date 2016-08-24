@@ -180,6 +180,11 @@ impl BluetoothAdapter {
         self.get_adapter().get_id()
     }
 
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_id(&self, id: String) {
+        self.get_adapter().set_id(id)
+    }
+
     pub fn get_devices(&self) -> Result<Vec<BluetoothDevice>, Box<Error>> {
         let device_list = try!(self.get_adapter().get_device_list());
         Ok(device_list.into_iter().map(|device| BluetoothDevice::create_device(self.clone(), device)).collect())
@@ -197,6 +202,11 @@ impl BluetoothAdapter {
 
     pub fn get_address(&self) -> Result<String, Box<Error>> {
         self.get_adapter().get_address()
+    }
+
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_address(&self, address: String) -> Result<(), Box<Error>> {
+        self.get_adapter().set_address(address)
     }
 
     pub fn get_name(&self) -> Result<String, Box<Error>> {
@@ -218,6 +228,11 @@ impl BluetoothAdapter {
 
     pub fn get_class(&self) -> Result<u32, Box<Error>> {
         self.get_adapter().get_class()
+    }
+
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_class(&self, class: u32) -> Result<(), Box<Error>> {
+        self.get_adapter().set_class(class)
     }
 
     pub fn is_powered(&self) -> Result<bool, Box<Error>> {
@@ -264,12 +279,22 @@ impl BluetoothAdapter {
         self.get_adapter().is_discovering()
     }
 
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_discovering(&self, is_discovering: bool) -> Result<(), Box<Error>> {
+        self.get_adapter().set_discovering(is_discovering)
+    }
+
     pub fn create_discovery_session(&self) -> Result<BluetoothDiscoverySession, Box<Error>> {
         BluetoothDiscoverySession::create_session(self.clone())
     }
 
     pub fn get_uuids(&self) -> Result<Vec<String>, Box<Error>> {
         self.get_adapter().get_uuids()
+    }
+
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_uuids(&self, uuids: Vec<String>) -> Result<(), Box<Error>> {
+        self.get_adapter().set_uuids(uuids)
     }
 
     pub fn get_vendor_id_source(&self) -> Result<String, Box<Error>> {
@@ -290,6 +315,11 @@ impl BluetoothAdapter {
 
     pub fn get_modalias(&self) -> Result<(String, u32, u32, u32), Box<Error>> {
         self.get_adapter().get_modalias()
+    }
+
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_modalias(&self, modalias: String) -> Result<(), Box<Error>> {
+        self.get_adapter().set_modalias(modalias)
     }
 }
 
@@ -400,6 +430,11 @@ impl BluetoothDevice {
         self.get_device().get_id()
     }
 
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_id(&self, id: String) {
+        self.get_device().set_id(id)
+    }
+
     pub fn get_adapter(&self) -> BluetoothAdapter {
         self.adapter.borrow_mut().clone()
     }
@@ -432,6 +467,11 @@ impl BluetoothDevice {
 
     pub fn get_appearance(&self) -> Result<u16, Box<Error>> {
         self.get_device().get_appearance()
+    }
+
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_appearance(&self, appearance: u16) -> Result<(), Box<Error>> {
+        self.get_device().set_appearance(appearance)
     }
 
     pub fn get_uuids(&self) -> Result<Vec<String>, Box<Error>> {
@@ -492,6 +532,11 @@ impl BluetoothDevice {
 
     pub fn get_tx_power(&self) -> Result<i16, Box<Error>> {
         self.get_device().get_tx_power()
+    }
+
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_tx_power(&self, tx_power: i16) -> Result<(), Box<Error>> {
+        self.get_device().set_tx_power(tx_power)
     }
 
     pub fn get_gatt_services(&self) -> Result<Vec<BluetoothGATTService>, Box<Error>> {
