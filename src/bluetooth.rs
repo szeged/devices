@@ -478,6 +478,11 @@ impl BluetoothDevice {
         self.get_device().get_uuids()
     }
 
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_uuids(&self, uuids: Vec<String>) -> Result<(), Box<Error>> {
+        self.get_device().set_uuids(uuids)
+    }
+
     pub fn is_paired(&self) -> Result<bool, Box<Error>> {
         self.get_device().is_paired()
     }
@@ -640,6 +645,11 @@ impl BluetoothGATTService {
 
     pub fn get_uuid(&self) -> Result<String, Box<Error>> {
         self.get_gatt_service().get_uuid()
+    }
+
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_uuid(&self, uuid: String) -> Result<(), Box<Error>> {
+        self.get_gatt_service().set_uuid(uuid)
     }
 
     pub fn is_primary(&self) -> Result<bool, Box<Error>> {
