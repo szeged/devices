@@ -10,5 +10,5 @@ extern crate blurdroid;
 extern crate blurmock;
 
 pub mod bluetooth;
-#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
 mod empty;

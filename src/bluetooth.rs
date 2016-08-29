@@ -6,7 +6,7 @@
 use blurz::bluetooth_adapter::BluetoothAdapter as BluetoothAdapterBluez;
 #[cfg(all(target_os = "android", feature = "bluetooth"))]
 use blurdroid::bluetooth_adapter::Adapter as BluetoothAdapterAndroid;
-#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
 use empty::BluetoothAdapter as BluetoothAdapterEmpty;
 #[cfg(feature = "bluetooth-test")]
 use blurmock::fake_adapter::FakeBluetoothAdapter;
@@ -14,7 +14,7 @@ use blurmock::fake_adapter::FakeBluetoothAdapter;
 use blurz::bluetooth_device::BluetoothDevice as BluetoothDeviceBluez;
 #[cfg(all(target_os = "android", feature = "bluetooth"))]
 use blurdroid::bluetooth_device::Device as BluetoothDeviceAndroid;
-#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
 use empty::BluetoothDevice as BluetoothDeviceEmpty;
 #[cfg(feature = "bluetooth-test")]
 use blurmock::fake_device::FakeBluetoothDevice;
@@ -22,7 +22,7 @@ use blurmock::fake_device::FakeBluetoothDevice;
 use blurz::bluetooth_gatt_characteristic::BluetoothGATTCharacteristic as BluetoothGATTCharacteristicBluez;
 #[cfg(all(target_os = "android", feature = "bluetooth"))]
 use blurdroid::bluetooth_gatt_characteristic::Characteristic as BluetoothGATTCharacteristicAndroid;
-#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
 use empty::BluetoothGATTCharacteristic as BluetoothGATTCharacteristicEmpty;
 #[cfg(feature = "bluetooth-test")]
 use blurmock::fake_characteristic::FakeBluetoothGATTCharacteristic;
@@ -30,7 +30,7 @@ use blurmock::fake_characteristic::FakeBluetoothGATTCharacteristic;
 use blurz::bluetooth_gatt_descriptor::BluetoothGATTDescriptor as BluetoothGATTDescriptorBluez;
 #[cfg(all(target_os = "android", feature = "bluetooth"))]
 use blurdroid::bluetooth_gatt_descriptor::Descriptor as BluetoothGATTDescriptorAndroid;
-#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
 use empty::BluetoothGATTDescriptor as BluetoothGATTDescriptorEmpty;
 #[cfg(feature = "bluetooth-test")]
 use blurmock::fake_descriptor::FakeBluetoothGATTDescriptor;
@@ -38,7 +38,7 @@ use blurmock::fake_descriptor::FakeBluetoothGATTDescriptor;
 use blurz::bluetooth_gatt_service::BluetoothGATTService as BluetoothGATTServiceBluez;
 #[cfg(all(target_os = "android", feature = "bluetooth"))]
 use blurdroid::bluetooth_gatt_service::Service as BluetoothGATTServiceAndroid;
-#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
 use empty::BluetoothGATTService as BluetoothGATTServiceEmpty;
 #[cfg(feature = "bluetooth-test")]
 use blurmock::fake_service::FakeBluetoothGATTService;
@@ -46,7 +46,7 @@ use blurmock::fake_service::FakeBluetoothGATTService;
 use blurz::bluetooth_discovery_session::BluetoothDiscoverySession as BluetoothDiscoverySessionBluez;
 #[cfg(all(target_os = "android", feature = "bluetooth"))]
 use blurdroid::bluetooth_discovery_session::DiscoverySession as BluetoothDiscoverySessionAndroid;
-#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+#[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
 use empty::BluetoothDiscoverySession as BluetoothDiscoverySessionEmpty;
 #[cfg(feature = "bluetooth-test")]
 use blurmock::fake_discovery_session::FakeBluetoothDiscoverySession;
@@ -61,7 +61,7 @@ pub struct BluetoothAdapter {
     adapter: Arc<BluetoothAdapterBluez>,
     #[cfg(all(target_os = "android", feature = "bluetooth"))]
     adapter: Arc<BluetoothAdapterAndroid>,
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     adapter: Arc<BluetoothAdapterEmpty>,
     #[cfg(feature = "bluetooth-test")]
     adapter: Arc<FakeBluetoothAdapter>,
@@ -74,7 +74,7 @@ pub struct BluetoothDiscoverySession {
     session: Arc<BluetoothDiscoverySessionBluez>,
     #[cfg(all(target_os = "android", feature = "bluetooth"))]
     session: Arc<BluetoothDiscoverySessionAndroid>,
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     session: Arc<BluetoothDiscoverySessionEmpty>,
     #[cfg(feature = "bluetooth-test")]
     session: Arc<FakeBluetoothDiscoverySession>,
@@ -87,7 +87,7 @@ pub struct BluetoothDevice {
     device: Arc<BluetoothDeviceBluez>,
     #[cfg(all(target_os = "android", feature = "bluetooth"))]
     device: Arc<BluetoothDeviceAndroid>,
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     device: Arc<BluetoothDeviceEmpty>,
     #[cfg(feature = "bluetooth-test")]
     device: Arc<FakeBluetoothDevice>,
@@ -100,7 +100,7 @@ pub struct BluetoothGATTService {
     gatt_service: Arc<BluetoothGATTServiceBluez>,
     #[cfg(all(target_os = "android", feature = "bluetooth"))]
     gatt_service: Arc<BluetoothGATTServiceAndroid>,
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     gatt_service: Arc<BluetoothGATTServiceEmpty>,
     #[cfg(feature = "bluetooth-test")]
     gatt_service: Arc<FakeBluetoothGATTService>,
@@ -113,7 +113,7 @@ pub struct BluetoothGATTCharacteristic {
     gatt_characteristic: Arc<BluetoothGATTCharacteristicBluez>,
     #[cfg(all(target_os = "android", feature = "bluetooth"))]
     gatt_characteristic: Arc<BluetoothGATTCharacteristicAndroid>,
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     gatt_characteristic: Arc<BluetoothGATTCharacteristicEmpty>,
     #[cfg(feature = "bluetooth-test")]
     gatt_characteristic: Arc<FakeBluetoothGATTCharacteristic>,
@@ -126,7 +126,7 @@ pub struct BluetoothGATTDescriptor {
     gatt_descriptor: Arc<BluetoothGATTDescriptorBluez>,
     #[cfg(all(target_os = "android", feature = "bluetooth"))]
     gatt_descriptor: Arc<BluetoothGATTDescriptorAndroid>,
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     gatt_descriptor: Arc<BluetoothGATTDescriptorEmpty>,
     #[cfg(feature = "bluetooth-test")]
     gatt_descriptor: Arc<FakeBluetoothGATTDescriptor>,
@@ -145,7 +145,7 @@ impl BluetoothAdapter {
         Ok(BluetoothAdapter {adapter: Arc::new(blurdroid_adapter)})
     }
 
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     pub fn init() -> Result<BluetoothAdapter, Box<Error>> {
         let adapter = try!(BluetoothAdapterEmpty::init());
         Ok(BluetoothAdapter {adapter: Arc::new(adapter)})
@@ -166,7 +166,7 @@ impl BluetoothAdapter {
         self.adapter.clone()
     }
 
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     fn get_adapter(&self) -> Arc<BluetoothAdapterEmpty> {
         self.adapter.clone()
     }
@@ -342,7 +342,7 @@ impl BluetoothDiscoverySession {
         })
     }
 
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     pub fn create_session(adapter: BluetoothAdapter) -> Result<BluetoothDiscoverySession, Box<Error>> {
         let empty_session = try!(BluetoothDiscoverySessionEmpty::create_session(adapter.get_adapter()));
         Ok(BluetoothDiscoverySession{
@@ -390,7 +390,7 @@ impl BluetoothDevice {
         }
     }
 
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     pub fn create_device(adapter: BluetoothAdapter, device: String) -> BluetoothDevice {
         BluetoothDevice{
             adapter: RefCell::new(adapter),
@@ -416,7 +416,7 @@ impl BluetoothDevice {
         self.device.clone()
     }
 
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     fn get_device(&self) -> Arc<BluetoothDeviceEmpty> {
         self.device.clone()
     }
@@ -591,7 +591,7 @@ impl BluetoothGATTService {
         }
     }
 
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     pub fn create_service(device: BluetoothDevice, service: String) -> BluetoothGATTService {
         BluetoothGATTService{
             device: RefCell::new(device),
@@ -625,7 +625,7 @@ impl BluetoothGATTService {
         self.gatt_service.clone()
     }
 
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     fn get_gatt_service(&self) -> Arc<BluetoothGATTServiceEmpty> {
         self.gatt_service.clone()
     }
@@ -684,7 +684,7 @@ impl BluetoothGATTCharacteristic {
         }
     }
 
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     pub fn create_characteristic(service: BluetoothGATTService, characteristic: String) -> BluetoothGATTCharacteristic {
         BluetoothGATTCharacteristic{
             service: RefCell::new(service),
@@ -710,7 +710,7 @@ impl BluetoothGATTCharacteristic {
         self.gatt_characteristic.clone()
     }
 
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     fn get_gatt_characteristic(&self) -> Arc<BluetoothGATTCharacteristicEmpty> {
         self.gatt_characteristic.clone()
     }
@@ -783,7 +783,7 @@ impl BluetoothGATTDescriptor {
         }
     }
 
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     pub fn create_descriptor(characteristic: BluetoothGATTCharacteristic, descriptor: String) -> BluetoothGATTDescriptor {
         BluetoothGATTDescriptor{
             characteristic: RefCell::new(characteristic),
@@ -809,7 +809,7 @@ impl BluetoothGATTDescriptor {
         self.gatt_descriptor.clone()
     }
 
-    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
+    #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"), feature = "bluetooth-test")))]
     fn get_gatt_descriptor(&self) -> Arc<BluetoothGATTDescriptorEmpty> {
         self.gatt_descriptor.clone()
     }
