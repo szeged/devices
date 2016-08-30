@@ -243,6 +243,16 @@ impl BluetoothAdapter {
         self.get_adapter().set_powered(value)
     }
 
+    #[cfg(feature = "bluetooth-test")]
+    pub fn is_present(&self) -> Result<bool, Box<Error>> {
+        self.get_adapter().is_present()
+    }
+
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_present(&self, value: bool) -> Result<(), Box<Error>> {
+        self.get_adapter().set_present(value)
+    }
+
     pub fn is_discoverable(&self) -> Result<bool, Box<Error>> {
         self.get_adapter().is_discoverable()
     }
