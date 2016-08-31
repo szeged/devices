@@ -501,6 +501,16 @@ impl BluetoothDevice {
         self.get_device().is_connected()
     }
 
+    #[cfg(feature = "bluetooth-test")]
+    pub fn is_connectable(&self) -> Result<bool, Box<Error>> {
+        self.get_device().is_connectable()
+    }
+
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_connectable(&self, connectable: bool) -> Result<(), Box<Error>> {
+        self.get_device().set_connectable(connectable)
+    }
+
     pub fn is_trusted(&self) -> Result<bool, Box<Error>> {
         self.get_device().is_trusted()
     }
