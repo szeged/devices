@@ -676,6 +676,11 @@ impl BluetoothGATTService {
         self.get_gatt_service().is_primary()
     }
 
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_primary(&self, value: bool) -> Result<(), Box<Error>> {
+        self.get_gatt_service().set_is_primary(value)
+    }
+
     pub fn get_includes(&self) -> Result<Vec<BluetoothGATTService>, Box<Error>> {
         let services = try!(self.get_gatt_service().get_includes());
         Ok(services.into_iter().map(|service| BluetoothGATTService::create_service(self.get_device(), service)).collect())
@@ -750,6 +755,11 @@ impl BluetoothGATTCharacteristic {
 
     pub fn get_uuid(&self) -> Result<String, Box<Error>> {
         self.get_gatt_characteristic().get_uuid()
+    }
+
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_uuid(&self, uuid: String) -> Result<(), Box<Error>> {
+        self.get_gatt_characteristic().set_uuid(uuid)
     }
 
     pub fn get_value(&self) -> Result<Vec<u8>, Box<Error>> {
