@@ -15,4 +15,4 @@ blurz = { version = "0.2.0", optional = true }
 blurdroid = { version = "0.1.1", optional = true }
 
 [dependencies]
-blurmock = { git = "https://github.com/zakorgy/fake-blurz.git", branch = "blurmock", optional = true }
+blurmock = { git = "https://github.com/szeged/blurmock.git", branch = "master", optional = true }
