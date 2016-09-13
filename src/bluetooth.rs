@@ -294,6 +294,11 @@ impl BluetoothAdapter {
         self.get_adapter().set_discovering(is_discovering)
     }
 
+    #[cfg(feature = "bluetooth-test")]
+    pub fn set_can_start_discovery(&self, can_start_discovery: bool) -> Result<(), Box<Error>> {
+        self.get_adapter().set_can_start_discovery(can_start_discovery)
+    }
+
     pub fn create_discovery_session(&self) -> Result<BluetoothDiscoverySession, Box<Error>> {
         BluetoothDiscoverySession::create_session(self.clone())
     }
@@ -620,18 +625,10 @@ impl BluetoothGATTService {
     }
 
     #[cfg(feature = "bluetooth-test")]
-    pub fn create_service(device: BluetoothDevice, service: Arc<FakeBluetoothGATTService>) -> BluetoothGATTService {
+    pub fn create_service(device: BluetoothDevice, service: String) -> BluetoothGATTService {
         BluetoothGATTService{
+            gatt_service: FakeBluetoothGATTService::new_empty(device.get_device(), service),
             device: RefCell::new(device),
-            gatt_service: service,
-        }
-    }
-
-    #[cfg(feature = "bluetooth-test")]
-    pub fn new_mock(device: BluetoothDevice, service_id: String) -> BluetoothGATTService {
-        BluetoothGATTService{
-            device: RefCell::new(device.clone()),
-            gatt_service: FakeBluetoothGATTService::new_empty(device.get_device(), service_id),
         }
     }
 
@@ -718,10 +715,10 @@ impl BluetoothGATTCharacteristic {
     }
 
     #[cfg(feature = "bluetooth-test")]
-    pub fn create_characteristic(service: BluetoothGATTService, characteristic: Arc<FakeBluetoothGATTCharacteristic>) -> BluetoothGATTCharacteristic {
+    pub fn create_characteristic(service: BluetoothGATTService, characteristic: String) -> BluetoothGATTCharacteristic {
         BluetoothGATTCharacteristic{
+            gatt_characteristic: FakeBluetoothGATTCharacteristic::new_empty(service.get_gatt_service(), characteristic),
             service: RefCell::new(service),
-            gatt_characteristic: characteristic
         }
     }
 
@@ -822,10 +819,10 @@ impl BluetoothGATTDescriptor {
     }
 
     #[cfg(feature = "bluetooth-test")]
-    pub fn create_descriptor(characteristic: BluetoothGATTCharacteristic, descriptor: Arc<FakeBluetoothGATTDescriptor>) -> BluetoothGATTDescriptor {
+    pub fn create_descriptor(characteristic: BluetoothGATTCharacteristic, descriptor: String) -> BluetoothGATTDescriptor {
         BluetoothGATTDescriptor{
+            gatt_descriptor: FakeBluetoothGATTDescriptor::new_empty(characteristic.get_gatt_characteristic(), descriptor),
             characteristic: RefCell::new(characteristic),
-            gatt_descriptor: descriptor
         }
     }
 
