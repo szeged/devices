@@ -5,8 +5,7 @@ authors = ["The Servo Project Developers"]
 
 [features]
 default = ["bluetooth"]
-bluetooth = ["blurz", "blurdroid"]
-bluetooth-test = ["blurmock"]
+bluetooth = ["blurz", "blurdroid","blurmock"]
 
 [target.'cfg(target_os = "linux")'.dependencies]
 blurz = { version = "0.2.0", optional = true }
