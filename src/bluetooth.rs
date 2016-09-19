@@ -632,10 +632,9 @@ impl BluetoothGATTService {
         get_inner_and_call_test_func!(self, BluetoothGATTService, set_is_primary, primary)
     }
 
-    pub fn get_includes(&self) -> Result<Vec<BluetoothGATTService>, Box<Error>> {
-        /*let services = try!(self.get_gatt_service().get_includes());
-        Ok(services.into_iter().map(|service| BluetoothGATTService::create_service(self.get_device(), service)).collect())*/
-        Err(Box::from(NOT_SUPPORTED_ERROR))
+    pub fn get_includes(&self, device: BluetoothDevice) -> Result<Vec<BluetoothGATTService>, Box<Error>> {
+        let services = try!(get_inner_and_call!(self, BluetoothGATTService, get_includes));
+        Ok(services.into_iter().map(|service| BluetoothGATTService::create_service(device.clone(), service)).collect())
     }
 
     pub fn get_gatt_characteristics(&self) -> Result<Vec<BluetoothGATTCharacteristic>, Box<Error>> {
