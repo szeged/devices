@@ -156,6 +156,22 @@ macro_rules! get_inner_and_call(
     };
 );
 
+macro_rules! get_inner_and_call_test_func {
+    ($enum_value: expr, $enum_type: ident, $function_name: ident, $value: expr) => {
+        match $enum_value {
+            &$enum_type::Mock(ref fake) => fake.$function_name($value),
+            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
+        }
+    };
+
+    ($enum_value: expr, $enum_type: ident, $function_name: ident) => {
+        match $enum_value {
+            &$enum_type::Mock(ref fake) => fake.$function_name(),
+            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
+        }
+    };
+}
+
 impl BluetoothAdapter {
     #[cfg(all(target_os = "linux", feature = "bluetooth"))]
     pub fn init() -> Result<BluetoothAdapter, Box<Error>> {
@@ -225,10 +241,7 @@ impl BluetoothAdapter {
 
     #[cfg(feature = "bluetooth")]
     pub fn set_name(&self, name: String) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_name(name),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_name, name)
     }
 
     pub fn get_alias(&self) -> Result<String, Box<Error>> {
@@ -236,11 +249,8 @@ impl BluetoothAdapter {
     }
 
     #[cfg(feature = "bluetooth")]
-    pub fn set_alias(&self, value: String) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_alias(value),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+    pub fn set_alias(&self, alias: String) -> Result<(), Box<Error>> {
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_alias, alias)
     }
 
     pub fn get_class(&self) -> Result<u32, Box<Error>> {
@@ -249,10 +259,7 @@ impl BluetoothAdapter {
 
     #[cfg(feature = "bluetooth")]
     pub fn set_class(&self, class: u32) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_class(class),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_class, class)
     }
 
     pub fn is_powered(&self) -> Result<bool, Box<Error>> {
@@ -260,11 +267,8 @@ impl BluetoothAdapter {
     }
 
     #[cfg(feature = "bluetooth")]
-    pub fn set_powered(&self, value: bool) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_powered(value),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+    pub fn set_powered(&self, powered: bool) -> Result<(), Box<Error>> {
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_powered, powered)
     }
 
     #[cfg(feature = "bluetooth")]
@@ -276,11 +280,8 @@ impl BluetoothAdapter {
     }
 
     #[cfg(feature = "bluetooth")]
-    pub fn set_present(&self, value: bool) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_present(value),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+    pub fn set_present(&self, present: bool) -> Result<(), Box<Error>> {
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_present, present)
     }
 
     pub fn is_discoverable(&self) -> Result<bool, Box<Error>> {
@@ -288,11 +289,8 @@ impl BluetoothAdapter {
     }
 
     #[cfg(feature = "bluetooth")]
-    pub fn set_discoverable(&self, value: bool) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_discoverable(value),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+    pub fn set_discoverable(&self, discoverable: bool) -> Result<(), Box<Error>> {
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_discoverable, discoverable)
     }
 
     pub fn is_pairable(&self) -> Result<bool, Box<Error>> {
@@ -300,11 +298,8 @@ impl BluetoothAdapter {
     }
 
     #[cfg(feature = "bluetooth")]
-    pub fn set_pairable(&self, value: bool) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_pairable(value),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+    pub fn set_pairable(&self, pairable: bool) -> Result<(), Box<Error>> {
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_pairable, pairable)
     }
 
     pub fn get_pairable_timeout(&self) -> Result<u32, Box<Error>> {
@@ -312,11 +307,8 @@ impl BluetoothAdapter {
     }
 
     #[cfg(feature = "bluetooth")]
-    pub fn set_pairable_timeout(&self, value: u32) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_pairable_timeout(value),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+    pub fn set_pairable_timeout(&self, timeout: u32) -> Result<(), Box<Error>> {
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_pairable_timeout, timeout)
     }
 
     pub fn get_discoverable_timeout(&self) -> Result<u32, Box<Error>> {
@@ -324,11 +316,8 @@ impl BluetoothAdapter {
     }
 
     #[cfg(feature = "bluetooth")]
-    pub fn set_discoverable_timeout(&self, value: u32) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_discoverable_timeout(value),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+    pub fn set_discoverable_timeout(&self, timeout: u32) -> Result<(), Box<Error>> {
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_discoverable_timeout, timeout)
     }
 
     pub fn is_discovering(&self) -> Result<bool, Box<Error>> {
@@ -336,19 +325,13 @@ impl BluetoothAdapter {
     }
 
     #[cfg(feature = "bluetooth")]
-    pub fn set_discovering(&self, is_discovering: bool) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_discovering(is_discovering),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+    pub fn set_discovering(&self, discovering: bool) -> Result<(), Box<Error>> {
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_discovering, discovering)
     }
 
     #[cfg(feature = "bluetooth")]
     pub fn set_can_start_discovery(&self, can_start_discovery: bool) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_can_start_discovery(can_start_discovery),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_can_start_discovery, can_start_discovery)
     }
 
     #[cfg(feature = "bluetooth")]
@@ -362,10 +345,7 @@ impl BluetoothAdapter {
 
     #[cfg(feature = "bluetooth")]
     pub fn set_uuids(&self, uuids: Vec<String>) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_uuids(uuids),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_uuids, uuids)
     }
 
     pub fn get_vendor_id_source(&self) -> Result<String, Box<Error>> {
@@ -390,10 +370,7 @@ impl BluetoothAdapter {
 
     #[cfg(feature = "bluetooth")]
     pub fn set_modalias(&self, modalias: String) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_modalias(modalias),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothAdapter, set_modalias, modalias)
     }
 }
 
@@ -473,10 +450,7 @@ impl BluetoothDevice {
 
     #[cfg(feature = "bluetooth")]
     pub fn set_address(&self, address: String) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothDevice::Mock(ref fake_device) => fake_device.set_address(address),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothDevice, set_address, address)
     }
 
     pub fn get_name(&self) -> Result<String, Box<Error>> {
@@ -485,10 +459,7 @@ impl BluetoothDevice {
 
     #[cfg(feature = "bluetooth")]
     pub fn set_name(&self, name: String) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothDevice::Mock(ref fake_device) => fake_device.set_name(name),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothDevice, set_name, name)
     }
 
     pub fn get_icon(&self) -> Result<String, Box<Error>> {
@@ -505,10 +476,7 @@ impl BluetoothDevice {
 
     #[cfg(feature = "bluetooth")]
     pub fn set_appearance(&self, appearance: u16) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothDevice::Mock(ref fake_device) => fake_device.set_appearance(appearance),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothDevice, set_appearance, appearance)
     }
 
     pub fn get_uuids(&self) -> Result<Vec<String>, Box<Error>> {
@@ -517,10 +485,7 @@ impl BluetoothDevice {
 
     #[cfg(feature = "bluetooth")]
     pub fn set_uuids(&self, uuids: Vec<String>) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothDevice::Mock(ref fake_device) => fake_device.set_uuids(uuids),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothDevice, set_uuids, uuids)
     }
 
     pub fn is_paired(&self) -> Result<bool, Box<Error>> {
@@ -533,18 +498,12 @@ impl BluetoothDevice {
 
     #[cfg(feature = "bluetooth")]
     pub fn is_connectable(&self) -> Result<bool, Box<Error>> {
-        match self {
-            &BluetoothDevice::Mock(ref fake_device) => fake_device.is_connectable(),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothDevice, is_connectable)
     }
 
     #[cfg(feature = "bluetooth")]
     pub fn set_connectable(&self, connectable: bool) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothDevice::Mock(ref fake_device) => fake_device.set_connectable(connectable),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothDevice, set_connectable, connectable)
     }
 
     pub fn is_trusted(&self) -> Result<bool, Box<Error>> {
@@ -561,10 +520,7 @@ impl BluetoothDevice {
 
     #[cfg(feature = "bluetooth")]
     pub fn set_alias(&self, alias: String) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothDevice::Mock(ref fake_device) => fake_device.set_alias(alias),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothDevice, set_alias, alias)
     }
 
     pub fn is_legacy_pairing(&self) -> Result<bool, Box<Error>> {
@@ -597,14 +553,6 @@ impl BluetoothDevice {
 
     pub fn get_tx_power(&self) -> Result<i16, Box<Error>> {
         get_inner_and_call!(self, BluetoothDevice, get_tx_power)
-    }
-
-    #[cfg(feature = "bluetooth")]
-    pub fn set_tx_power(&self, tx_power: i16) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothDevice::Mock(ref fake_device) => fake_device.set_tx_power(tx_power),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
     }
 
     pub fn get_gatt_services(&self) -> Result<Vec<BluetoothGATTService>, Box<Error>> {
@@ -680,11 +628,8 @@ impl BluetoothGATTService {
     }
 
     #[cfg(feature = "bluetooth")]
-    pub fn set_primary(&self, value: bool) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothGATTService::Mock(ref fake_service) => fake_service.set_is_primary(value),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+    pub fn set_primary(&self, primary: bool) -> Result<(), Box<Error>> {
+        get_inner_and_call_test_func!(self, BluetoothGATTService, set_is_primary, primary)
     }
 
     pub fn get_includes(&self) -> Result<Vec<BluetoothGATTService>, Box<Error>> {
@@ -731,10 +676,7 @@ impl BluetoothGATTCharacteristic {
 
     #[cfg(feature = "bluetooth")]
     pub fn set_uuid(&self, uuid: String) -> Result<(), Box<Error>> {
-        match self {
-            &BluetoothGATTCharacteristic::Mock(ref fake_characteristic) => fake_characteristic.set_uuid(uuid),
-            _ => Err(Box::from(NOT_SUPPORTED_ERROR)),
-        }
+        get_inner_and_call_test_func!(self, BluetoothGATTCharacteristic, set_uuid, uuid)
     }
 
     pub fn get_value(&self) -> Result<Vec<u8>, Box<Error>> {
