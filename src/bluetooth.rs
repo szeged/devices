@@ -8,7 +8,7 @@ use blurz::bluetooth_adapter::BluetoothAdapter as BluetoothAdapterBluez;
 use blurdroid::bluetooth_adapter::Adapter as BluetoothAdapterAndroid;
 #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
 use empty::BluetoothAdapter as BluetoothAdapterEmpty;
-#[cfg(feature = "bluetooth")]
+#[cfg(feature = "bluetooth-test")]
 use blurmock::fake_adapter::FakeBluetoothAdapter;
 #[cfg(all(target_os = "linux", feature = "bluetooth"))]
 use blurz::bluetooth_device::BluetoothDevice as BluetoothDeviceBluez;
@@ -16,7 +16,7 @@ use blurz::bluetooth_device::BluetoothDevice as BluetoothDeviceBluez;
 use blurdroid::bluetooth_device::Device as BluetoothDeviceAndroid;
 #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
 use empty::BluetoothDevice as BluetoothDeviceEmpty;
-#[cfg(feature = "bluetooth")]
+#[cfg(feature = "bluetooth-test")]
 use blurmock::fake_device::FakeBluetoothDevice;
 #[cfg(all(target_os = "linux", feature = "bluetooth"))]
 use blurz::bluetooth_gatt_characteristic::BluetoothGATTCharacteristic as BluetoothGATTCharacteristicBluez;
@@ -24,7 +24,7 @@ use blurz::bluetooth_gatt_characteristic::BluetoothGATTCharacteristic as Bluetoo
 use blurdroid::bluetooth_gatt_characteristic::Characteristic as BluetoothGATTCharacteristicAndroid;
 #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
 use empty::BluetoothGATTCharacteristic as BluetoothGATTCharacteristicEmpty;
-#[cfg(feature = "bluetooth")]
+#[cfg(feature = "bluetooth-test")]
 use blurmock::fake_characteristic::FakeBluetoothGATTCharacteristic;
 #[cfg(all(target_os = "linux", feature = "bluetooth"))]
 use blurz::bluetooth_gatt_descriptor::BluetoothGATTDescriptor as BluetoothGATTDescriptorBluez;
@@ -32,7 +32,7 @@ use blurz::bluetooth_gatt_descriptor::BluetoothGATTDescriptor as BluetoothGATTDe
 use blurdroid::bluetooth_gatt_descriptor::Descriptor as BluetoothGATTDescriptorAndroid;
 #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
 use empty::BluetoothGATTDescriptor as BluetoothGATTDescriptorEmpty;
-#[cfg(feature = "bluetooth")]
+#[cfg(feature = "bluetooth-test")]
 use blurmock::fake_descriptor::FakeBluetoothGATTDescriptor;
 #[cfg(all(target_os = "linux", feature = "bluetooth"))]
 use blurz::bluetooth_gatt_service::BluetoothGATTService as BluetoothGATTServiceBluez;
@@ -40,7 +40,7 @@ use blurz::bluetooth_gatt_service::BluetoothGATTService as BluetoothGATTServiceB
 use blurdroid::bluetooth_gatt_service::Service as BluetoothGATTServiceAndroid;
 #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
 use empty::BluetoothGATTService as BluetoothGATTServiceEmpty;
-#[cfg(feature = "bluetooth")]
+#[cfg(feature = "bluetooth-test")]
 use blurmock::fake_service::FakeBluetoothGATTService;
 #[cfg(all(target_os = "linux", feature = "bluetooth"))]
 use blurz::bluetooth_discovery_session::BluetoothDiscoverySession as BluetoothDiscoverySessionBluez;
@@ -48,7 +48,7 @@ use blurz::bluetooth_discovery_session::BluetoothDiscoverySession as BluetoothDi
 use blurdroid::bluetooth_discovery_session::DiscoverySession as BluetoothDiscoverySessionAndroid;
 #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
 use empty::BluetoothDiscoverySession as BluetoothDiscoverySessionEmpty;
-#[cfg(feature = "bluetooth")]
+#[cfg(feature = "bluetooth-test")]
 use blurmock::fake_discovery_session::FakeBluetoothDiscoverySession;
 
 use std::sync::Arc;
@@ -64,7 +64,7 @@ pub enum BluetoothAdapter {
     Android(Arc<BluetoothAdapterAndroid>),
     #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
     Empty(Arc<BluetoothAdapterEmpty>),
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     Mock(Arc<FakeBluetoothAdapter>),
 }
 
@@ -76,7 +76,7 @@ pub enum BluetoothDiscoverySession {
     Android(Arc<BluetoothDiscoverySessionAndroid>),
     #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
     Empty(Arc<BluetoothDiscoverySessionEmpty>),
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     Mock(Arc<FakeBluetoothDiscoverySession>),
 }
 
@@ -88,7 +88,7 @@ pub enum BluetoothDevice {
     Android(Arc<BluetoothDeviceAndroid>),
     #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
     Empty(Arc<BluetoothDeviceEmpty>),
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     Mock(Arc<FakeBluetoothDevice>),
 }
 
@@ -100,7 +100,7 @@ pub enum BluetoothGATTService {
     Android(Arc<BluetoothGATTServiceAndroid>),
     #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
     Empty(Arc<BluetoothGATTServiceEmpty>),
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     Mock(Arc<FakeBluetoothGATTService>),
 }
 
@@ -112,7 +112,7 @@ pub enum BluetoothGATTCharacteristic {
     Android(Arc<BluetoothGATTCharacteristicAndroid>),
     #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
     Empty(Arc<BluetoothGATTCharacteristicEmpty>),
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     Mock(Arc<FakeBluetoothGATTCharacteristic>),
 }
 
@@ -124,7 +124,7 @@ pub enum BluetoothGATTDescriptor {
     Android(Arc<BluetoothGATTDescriptorAndroid>),
     #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
     Empty(Arc<BluetoothGATTDescriptorEmpty>),
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     Mock(Arc<FakeBluetoothGATTDescriptor>),
 }
 
@@ -137,7 +137,7 @@ macro_rules! get_inner_and_call(
             &$enum_type::Android(ref android) => android.$function_name(),
             #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
             &$enum_type::Empty(ref empty) => empty.$function_name(),
-            #[cfg(feature = "bluetooth")]
+            #[cfg(feature = "bluetooth-test")]
             &$enum_type::Mock(ref fake) => fake.$function_name(),
         }
     };
@@ -150,7 +150,7 @@ macro_rules! get_inner_and_call(
             &$enum_type::Android(ref android) => android.$function_name($value),
             #[cfg(not(any(all(target_os = "linux", feature = "bluetooth"), all(target_os = "android", feature = "bluetooth"))))]
             &$enum_type::Empty(ref empty) => empty.$function_name($value),
-            #[cfg(feature = "bluetooth")]
+            #[cfg(feature = "bluetooth-test")]
             &$enum_type::Mock(ref fake) => fake.$function_name($value),
         }
     };
@@ -191,7 +191,7 @@ impl BluetoothAdapter {
         Ok(BluetoothAdapter::Empty(Arc::new(adapter)))
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn init_mock() -> Result<BluetoothAdapter, Box<Error>> {
         Ok(BluetoothAdapter::Mock(FakeBluetoothAdapter::new_empty()))
     }
@@ -200,7 +200,7 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, get_id)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_id(&self, id: String) {
         match self {
             &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_id(id),
@@ -227,7 +227,7 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, get_address)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_address(&self, address: String) -> Result<(), Box<Error>> {
         match self {
             &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_address(address),
@@ -239,7 +239,7 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, get_name)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_name(&self, name: String) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_name, name)
     }
@@ -248,7 +248,7 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, get_alias)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_alias(&self, alias: String) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_alias, alias)
     }
@@ -257,7 +257,7 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, get_class)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_class(&self, class: u32) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_class, class)
     }
@@ -266,12 +266,12 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, is_powered)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_powered(&self, powered: bool) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_powered, powered)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn is_present(&self) -> Result<bool, Box<Error>> {
         match self {
             &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.is_present(),
@@ -279,7 +279,7 @@ impl BluetoothAdapter {
         }
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_present(&self, present: bool) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_present, present)
     }
@@ -288,7 +288,7 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, is_discoverable)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_discoverable(&self, discoverable: bool) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_discoverable, discoverable)
     }
@@ -297,7 +297,7 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, is_pairable)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_pairable(&self, pairable: bool) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_pairable, pairable)
     }
@@ -306,7 +306,7 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, get_pairable_timeout)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_pairable_timeout(&self, timeout: u32) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_pairable_timeout, timeout)
     }
@@ -315,7 +315,7 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, get_discoverable_timeout)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_discoverable_timeout(&self, timeout: u32) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_discoverable_timeout, timeout)
     }
@@ -324,17 +324,17 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, is_discovering)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_discovering(&self, discovering: bool) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_discovering, discovering)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_can_start_discovery(&self, can_start_discovery: bool) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_can_start_discovery, can_start_discovery)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn create_discovery_session(&self) -> Result<BluetoothDiscoverySession, Box<Error>> {
         BluetoothDiscoverySession::create_session(self.clone())
     }
@@ -343,7 +343,7 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, get_uuids)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_uuids(&self, uuids: Vec<String>) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_uuids, uuids)
     }
@@ -368,7 +368,7 @@ impl BluetoothAdapter {
         get_inner_and_call!(self, BluetoothAdapter, get_modalias)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_modalias(&self, modalias: String) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothAdapter, set_modalias, modalias)
     }
@@ -392,7 +392,7 @@ impl BluetoothDiscoverySession {
                 let empty_session = try!(BluetoothDiscoverySessionEmpty::create_session(adapter.get_adapter()));
                 Ok(BluetoothDiscoverySession::Empty(Arc::new(empty_session)))
             },
-            #[cfg(feature = "bluetooth")]
+            #[cfg(feature = "bluetooth-test")]
             BluetoothAdapter::Mock(fake_adapter) => {
                 let test_session = try!(FakeBluetoothDiscoverySession::create_session(fake_adapter));
                 Ok(BluetoothDiscoverySession::Mock(Arc::new(test_session)))
@@ -425,7 +425,7 @@ impl BluetoothDevice {
             BluetoothAdapter::Empty(adapter) => {
                 BluetoothDevice::Empty(Arc::new(BluetoothDeviceEmpty::new(device)))
             },
-            #[cfg(feature = "bluetooth")]
+            #[cfg(feature = "bluetooth-test")]
             BluetoothAdapter::Mock(fake_adapter) => {
                 BluetoothDevice::Mock(FakeBluetoothDevice::new_empty(fake_adapter, device))
             },
@@ -436,7 +436,7 @@ impl BluetoothDevice {
         get_inner_and_call!(self, BluetoothDevice, get_id)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_id(&self, id: String) {
         match self {
             &BluetoothDevice::Mock(ref fake_device) => fake_device.set_id(id),
@@ -448,7 +448,7 @@ impl BluetoothDevice {
         get_inner_and_call!(self, BluetoothDevice, get_address)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_address(&self, address: String) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothDevice, set_address, address)
     }
@@ -457,7 +457,7 @@ impl BluetoothDevice {
         get_inner_and_call!(self, BluetoothDevice, get_name)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_name(&self, name: String) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothDevice, set_name, name)
     }
@@ -474,7 +474,7 @@ impl BluetoothDevice {
         get_inner_and_call!(self, BluetoothDevice, get_appearance)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_appearance(&self, appearance: u16) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothDevice, set_appearance, appearance)
     }
@@ -483,7 +483,7 @@ impl BluetoothDevice {
         get_inner_and_call!(self, BluetoothDevice, get_uuids)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_uuids(&self, uuids: Vec<String>) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothDevice, set_uuids, uuids)
     }
@@ -496,12 +496,12 @@ impl BluetoothDevice {
         get_inner_and_call!(self, BluetoothDevice, is_connected)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn is_connectable(&self) -> Result<bool, Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothDevice, is_connectable)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_connectable(&self, connectable: bool) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothDevice, set_connectable, connectable)
     }
@@ -518,7 +518,7 @@ impl BluetoothDevice {
         get_inner_and_call!(self, BluetoothDevice, get_alias)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_alias(&self, alias: String) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothDevice, set_alias, alias)
     }
@@ -600,7 +600,7 @@ impl BluetoothGATTService {
             BluetoothDevice::Empty(device) => {
                 BluetoothGATTService::Empty(Arc::new(BluetoothGATTServiceEmpty::new(service)))
             },
-            #[cfg(feature = "bluetooth")]
+            #[cfg(feature = "bluetooth-test")]
             BluetoothDevice::Mock(fake_device) => {
                 BluetoothGATTService::Mock(FakeBluetoothGATTService::new_empty(fake_device, service))
             },
@@ -615,7 +615,7 @@ impl BluetoothGATTService {
         get_inner_and_call!(self, BluetoothGATTService, get_uuid)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_uuid(&self, uuid: String) -> Result<(), Box<Error>> {
         match self {
             &BluetoothGATTService::Mock(ref fake_service) => fake_service.set_uuid(uuid),
@@ -627,7 +627,7 @@ impl BluetoothGATTService {
         get_inner_and_call!(self, BluetoothGATTService, is_primary)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_primary(&self, primary: bool) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothGATTService, set_is_primary, primary)
     }
@@ -658,7 +658,7 @@ impl BluetoothGATTCharacteristic {
             BluetoothGATTService::Empty(service) => {
                 BluetoothGATTCharacteristic::Empty(Arc::new(BluetoothGATTCharacteristicEmpty::new(characteristic)))
             },
-            #[cfg(feature = "bluetooth")]
+            #[cfg(feature = "bluetooth-test")]
             BluetoothGATTService::Mock(fake_service) => {
                 BluetoothGATTCharacteristic::Mock(FakeBluetoothGATTCharacteristic::new_empty(fake_service, characteristic))
             },
@@ -673,7 +673,7 @@ impl BluetoothGATTCharacteristic {
         get_inner_and_call!(self, BluetoothGATTCharacteristic, get_uuid)
     }
 
-    #[cfg(feature = "bluetooth")]
+    #[cfg(feature = "bluetooth-test")]
     pub fn set_uuid(&self, uuid: String) -> Result<(), Box<Error>> {
         get_inner_and_call_test_func!(self, BluetoothGATTCharacteristic, set_uuid, uuid)
     }
@@ -727,7 +727,7 @@ impl BluetoothGATTDescriptor {
             BluetoothGATTCharacteristic::Empty(characteristic) => {
                 BluetoothGATTDescriptor::Empty(Arc::new(BluetoothGATTDescriptorEmpty::new(descriptor)))
             },
-            #[cfg(feature = "bluetooth")]
+            #[cfg(feature = "bluetooth-test")]
             BluetoothGATTCharacteristic::Mock(fake_characteristic) => {
                 BluetoothGATTDescriptor::Mock(FakeBluetoothGATTDescriptor::new_empty(fake_characteristic, descriptor))
             },
