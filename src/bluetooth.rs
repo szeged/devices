@@ -159,13 +159,6 @@ macro_rules! get_inner_and_call(
 
 #[cfg(feature = "bluetooth-test")]
 macro_rules! get_inner_and_call_test_func {
-    ($enum_value: expr, $enum_type: ident, set_id, $value: expr) => {
-        match $enum_value {
-            &$enum_type::Mock(ref fake) => fake.set_id($value),
-            _ => (),
-        }
-    };
-
     ($enum_value: expr, $enum_type: ident, $function_name: ident, $value: expr) => {
         match $enum_value {
             &$enum_type::Mock(ref fake) => fake.$function_name($value),
@@ -211,7 +204,10 @@ impl BluetoothAdapter {
 
     #[cfg(feature = "bluetooth-test")]
     pub fn set_id(&self, id: String) {
-        get_inner_and_call_test_func!(self, BluetoothAdapter, set_id, id)
+        match self {
+            &BluetoothAdapter::Mock(ref fake_adapter) => fake_adapter.set_id(id),
+            _ => (),
+        }
     }
 
     pub fn get_devices(&self) -> Result<Vec<BluetoothDevice>, Box<Error>> {
@@ -440,7 +436,10 @@ impl BluetoothDevice {
 
     #[cfg(feature = "bluetooth-test")]
     pub fn set_id(&self, id: String) {
-        get_inner_and_call_test_func!(self, BluetoothDevice, set_id, id)
+        match self {
+            &BluetoothDevice::Mock(ref fake_adapter) => fake_adapter.set_id(id),
+            _ => (),
+        }
     }
 
     pub fn get_address(&self) -> Result<String, Box<Error>> {
