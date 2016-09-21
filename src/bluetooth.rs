@@ -472,7 +472,7 @@ impl BluetoothDevice {
 
     #[cfg(feature = "bluetooth-test")]
     pub fn set_name(&self, name: String) -> Result<(), Box<Error>> {
-        get_inner_and_call_test_func!(self, BluetoothDevice, set_name, name)
+        get_inner_and_call_test_func!(self, BluetoothDevice, set_name, Some(name))
     }
 
     pub fn get_icon(&self) -> Result<String, Box<Error>> {
@@ -499,7 +499,7 @@ impl BluetoothDevice {
 
     #[cfg(feature = "bluetooth-test")]
     pub fn set_appearance(&self, appearance: u16) -> Result<(), Box<Error>> {
-        get_inner_and_call_test_func!(self, BluetoothDevice, set_appearance, appearance)
+        get_inner_and_call_test_func!(self, BluetoothDevice, set_appearance, Some(appearance))
     }
 
     pub fn get_uuids(&self) -> Result<Vec<String>, Box<Error>> {
@@ -606,7 +606,7 @@ impl BluetoothDevice {
 
     #[cfg(feature = "bluetooth-test")]
     pub fn set_rssi(&self, rssi: i16) -> Result<(), Box<Error>> {
-        get_inner_and_call_test_func!(self, BluetoothDevice, set_rssi, rssi)
+        get_inner_and_call_test_func!(self, BluetoothDevice, set_rssi, Some(rssi))
     }
 
     pub fn get_tx_power(&self) -> Result<i16, Box<Error>> {
@@ -615,7 +615,7 @@ impl BluetoothDevice {
 
     #[cfg(feature = "bluetooth-test")]
     pub fn set_tx_power(&self, tx_power: i16) -> Result<(), Box<Error>> {
-        get_inner_and_call_test_func!(self, BluetoothDevice, set_tx_power, tx_power)
+        get_inner_and_call_test_func!(self, BluetoothDevice, set_tx_power, Some(tx_power))
     }
 
     pub fn get_gatt_services(&self) -> Result<Vec<BluetoothGATTService>, Box<Error>> {
@@ -760,7 +760,7 @@ impl BluetoothGATTCharacteristic {
 
     #[cfg(feature = "bluetooth-test")]
     pub fn set_value(&self, value: Vec<u8>) -> Result<(), Box<Error>> {
-        get_inner_and_call_test_func!(self, BluetoothGATTCharacteristic, set_value, value)
+        get_inner_and_call_test_func!(self, BluetoothGATTCharacteristic, set_value, Some(value))
     }
 
     pub fn is_notifying(&self) -> Result<bool, Box<Error>> {
@@ -852,7 +852,7 @@ impl BluetoothGATTDescriptor {
 
     #[cfg(feature = "bluetooth-test")]
     pub fn set_value(&self, value: Vec<u8>) -> Result<(), Box<Error>> {
-        get_inner_and_call_test_func!(self, BluetoothGATTDescriptor, set_value, value)
+        get_inner_and_call_test_func!(self, BluetoothGATTDescriptor, set_value, Some(value))
     }
 
     pub fn get_flags(&self) -> Result<Vec<String>, Box<Error>> {
