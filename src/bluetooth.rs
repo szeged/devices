@@ -471,8 +471,8 @@ impl BluetoothDevice {
     }
 
     #[cfg(feature = "bluetooth-test")]
-    pub fn set_name(&self, name: String) -> Result<(), Box<Error>> {
-        get_inner_and_call_test_func!(self, BluetoothDevice, set_name, Some(name))
+    pub fn set_name(&self, name: Option<String>) -> Result<(), Box<Error>> {
+        get_inner_and_call_test_func!(self, BluetoothDevice, set_name, name)
     }
 
     pub fn get_icon(&self) -> Result<String, Box<Error>> {
